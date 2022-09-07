@@ -1,6 +1,8 @@
 class Person {
      email;
      password
+     age
+     phone
 }
 
 let admin = new Person()
@@ -34,5 +36,16 @@ app.get("/api", function (request, response) {
      }
      console.log('Совпадений не обнаружено!')
      return response.status(400).send({bool: 1})
+})
+
+app.get("/api/user", function (request, response) {
+     console.log('API user')
+     let userEmail = request.query.email
+     for(let user of persons){
+          if(user.email === userEmail){
+               console.log('Совпадение User')
+               return response.status(200).send({})
+          }
+     }
 })
 app.listen(4201);
